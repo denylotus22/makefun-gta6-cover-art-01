@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Coast — Cover Studio</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">VC</span>
+    <div>
+      <h1>Vice Coast <span>Cover Studio</span></h1>
+      <p>Turn any photo into poster cover art. Offline, free, nothing uploaded.</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="undoBtn" type="button" title="Undo (Ctrl+Z)">↩ Undo</button>
+    <button id="redoBtn" type="button" title="Redo (Ctrl+Shift+Z)">↪ Redo</button>
+  </div>
+</header>
+
+<main class="app">
+  <section class="stage">
+    <div class="canvas-wrap">
+      <canvas id="cover" width="1080" height="1080" aria-label="Live cover preview"></canvas>
+      <p id="panelHint" class="hint">Click a panel to select it, then drag on it to move the photo.</p>
+    </div>
+    <div class="sizebar" role="group" aria-label="Export size">
+      <span class="size-label">Size</span>
+      <button type="button" class="size-btn is-active" data-size="1x1">1:1 · 1080×1080</button>
+      <button type="button" class="size-btn" data-size="4x5">4:5 · 1080×1350</button>
+      <button type="button" class="size-btn" data-size="9x16">9:16 · 1080×1920</button>
+      <button type="button" class="size-btn" data-size="16x9">16:9 · 1920×1080</button>
+    </div>
+    <div class="export-row">
+      <button id="exportBtn" type="button" class="export-btn">⬇ Export PNG</button>
+      <button id="exportAllBtn" type="button" class="export-all-btn">Export all 4 sizes</button>
+      <p id="status" role="status"></p>
+    </div>
+  </section>
+
+  <aside class="controls">
+    <section class="panel-block">
+      <h2>1 · Photos</h2>
+      <label class="upload-btn">＋ Add your photos
+        <input id="photoInput" type="file" accept="image/*" multiple hidden>
+      </label>
+      <div id="photoStrip" class="photo-strip" aria-label="Photos"></div>
+      <button id="fillAllBtn" type="button" class="ghost-btn">Fill every panel with the selected photo</button>
+      <p class="note">Tap a thumbnail to put that photo in the selected panel. Sample photos are original artwork made for this app.</p>
+    </section>
+
+    <section class="panel-block">
+      <h2>2 · Layout</h2>
+      <div id="layoutGrid" class="layout-grid" role="group" aria-label="Poster layout"></div>
+      <div class="selected-panel">
+        <h3>Selected panel <span id="selectedPanelName">1</span></h3>
+        <label>Zoom
+          <input id="zoomRange" type="range" min="1" max="2.5" step="0.05" value="1.15">
+        </label>
+        <div class="row-btns">
+          <button id="resetCropBtn" type="button" class="ghost-btn">Reset crop</button>
+          <button id="shuffleBtn" type="button" class="ghost-btn">Shuffle photos</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-block">
+      <h2>3 · Caption</h2>
+      <label>Title
+        <input id="titleInput" type="text" maxlength="28" value="VICE COAST">
+      </label>
+      <label>Tagline
+        <input id="taglineInput" type="text" maxlength="48" value="Sunset Heist">
+      </label>
+      <label>Title lettering
+        <select id="titleStyleSelect">
+          <option value="sunset">Sunset gradient</option>
+          <option value="white">White block</option>
+          <option value="neon">Neon pink</option>
+        </select>
+      </label>
+      <label>Title size
+        <input id="titleSizeRange" type="range" min="70" max="130" step="1" value="100">
+      </label>
+    </section>
+
+    <section class="panel-block">
+      <h2>4 · Colour grade</h2>
+      <div id="gradeGrid" class="grade-grid" role="group" aria-label="Colour grade"></div>
+      <div class="toggles">
+        <label><input id="grainToggle" type="checkbox" checked> Film grain</label>
+        <label><input id="vignetteToggle" type="checkbox" checked> Vignette</label>
+        <label><input id="frameToggle" type="checkbox" checked> White poster frame</label>
+      </div>
+    </section>
+
+    <section class="panel-block">
+      <h2>Presets</h2>
+      <div class="row-btns">
+        <button type="button" class="ghost-btn" data-preset="sunset-hero">Sunset Hero</button>
+        <button type="button" class="ghost-btn" data-preset="neon-nights">Neon Nights</button>
+        <button type="button" class="ghost-btn" data-preset="golden-grid">Golden Grid</button>
+        <button type="button" class="ghost-btn" data-preset="tilted-snaps">Tilted Snaps</button>
+      </div>
+    </section>
+  </aside>
+</main>
+
+<footer class="foot">
+  <p>Original artwork — no Rockstar Games logo, artwork or fonts. Lettering: Anton &amp; Pacifico, SIL Open Font License.</p>
+</footer>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
